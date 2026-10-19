@@ -1,11 +1,18 @@
 name: Bug
-description: Report an issue
-title: "[Bug] "
-labels: ["type:bug"]
+description: Report a defect
+title: "[bug] "
+labels: ["bug"]
 body:
   - type: textarea
-    id: reproduction
+    id: context
     attributes:
-      label: Reproduction steps and expected vs actual
+      label: Context and expected outcome
+      description: Explain the problem and expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria or reproduction steps
     validations:
       required: true

@@ -1,0 +1,11 @@
+name: Research
+description: Research spike or discovery
+title: "[Research] "
+labels: ["type:research"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question and evidence required
+    validations:
+      required: true

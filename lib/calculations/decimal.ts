@@ -9,7 +9,7 @@ function assertScale(scale: number): void {
 function pow10(n: number): bigint { assertScale(n); return 10n ** BigInt(n); }
 
 export function decimal(input: string): Decimal {
-  if (!/^[+-]?(?:0|[1-9]\\d*)(?:\\.\\d+)?$/.test(input)) throw new TypeError("Invalid decimal string");
+  if (!/^[+-]?(?:0|[1-9]\d*)(?:\.\d+)?$/.test(input)) throw new TypeError("Invalid decimal string");
   const negative = input.startsWith("-");
   const unsigned = input.replace(/^[+-]/, "");
   const [whole, fraction = ""] = unsigned.split(".");

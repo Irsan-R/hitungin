@@ -1,11 +1,18 @@
 name: Research
-description: Research spike or discovery
-title: "[Research] "
-labels: ["type:research"]
+description: Document a research spike
+title: "[research] "
+labels: ["documentation"]
 body:
   - type: textarea
-    id: question
+    id: context
     attributes:
-      label: Research question and evidence required
+      label: Context and expected outcome
+      description: Explain the problem and expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria or reproduction steps
     validations:
       required: true

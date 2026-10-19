@@ -1,17 +1,18 @@
 name: Feature
 description: Propose a product feature
-title: "[Feature] "
-labels: ["type:feature"]
+title: "[feature] "
+labels: ["enhancement"]
 body:
   - type: textarea
-    id: problem
+    id: context
     attributes:
-      label: Problem / user value
+      label: Context and expected outcome
+      description: Explain the problem and expected result.
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: Acceptance criteria
+      label: Acceptance criteria or reproduction steps
     validations:
       required: true

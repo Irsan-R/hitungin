@@ -1,4 +1,5 @@
+import {CalculatorSwitcher} from "@/components/calculator-switcher";
 import Link from "next/link";
-export function Header(){return <header className="site-header"><div className="nav-wrap"><Link className="brand" href="/">hitungin<span>.</span></Link><nav aria-label="Navigasi utama"><Link href="/">Beranda</Link><Link href="/kategori/">Kategori</Link></nav><Link className="nav-cta" href="/#cari">Cari kalkulator <span aria-hidden="true">↗</span></Link></div></header>}
+export function Header(){return <header className="site-header"><div className="nav-wrap"><Link className="brand" href="/">hitungin<span>.</span></Link><nav aria-label="Navigasi utama"><Link href="/">Beranda</Link><Link href="/kategori/">Kategori</Link></nav><CalculatorSwitcher/></div></header>}
 export function Footer(){return <footer className="site-footer"><div className="container footer-inner"><span>© Hitungin · Simulasi untuk membantu memahami angka.</span><span>Hasil bukan nasihat finansial atau perpajakan.</span></div></footer>}
 export function Breadcrumb({items}:{items:{label:string;href?:string}[]}){return <nav aria-label="Breadcrumb" className="breadcrumb"><Link href="/">Beranda</Link>{items.map((i,index)=><span key={index}><span aria-hidden="true"> / </span>{i.href?<Link href={i.href}>{i.label}</Link>:<span aria-current="page">{i.label}</span>}</span>)}</nav>}

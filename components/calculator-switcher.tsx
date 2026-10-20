@@ -1,0 +1,11 @@
+"use client";
+import {useEffect,useState} from "react";
+import Link from "next/link";
+import {categories,released,findCalculator} from "@/lib/catalog";
+import {useWorkspace} from "@/components/workspace-provider";
+export function CalculatorSwitcher(){const [open,setOpen]=useState(false);const [query,setQuery]=useState("");const {recent,results,clear}=useWorkspace();
+ useEffect(()=>{const handler=(e:KeyboardEvent)=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();setOpen(v=>!v)}if(e.key==="Escape")setOpen(false)};window.addEventListener("keydown",handler);return()=>window.removeEventListener("keydown",handler)},[]);
+ const available=categories.flatMap(c=>c.items.filter(i=>released.has(i[0])).map(i=>({slug:i[0],title:i[1],category:c.title})));
+ const filtered=available.filter(i=>(i.title+" "+i.category).toLowerCase().includes(query.toLowerCase()));
+ return <><button className="switcher-trigger" onClick={()=>setOpen(true)} aria-haspopup="dialog" aria-label="Buka pencarian kalkulator">⌕ <span>Cari kalkulator</span><kbd>Ctrl K</kbd></button>{open&&<div className="switcher-overlay" onMouseDown={e=>{if(e.target===e.currentTarget)setOpen(false)}}><section className="switcher-dialog" role="dialog" aria-modal="true" aria-label="Pindah kalkulator"><div className="switcher-top"><label className="sr-only" htmlFor="switcher-search">Cari kalkulator</label><input id="switcher-search" autoFocus placeholder="Cari kalkulator..." value={query} onChange={e=>setQuery(e.target.value)}/><button onClick={()=>setOpen(false)} aria-label="Tutup pencarian">✕</button></div>{!query&&recent.length>0&&<div className="switcher-group"><p className="eyebrow">TERAKHIR DIBUKA</p>{recent.map(slug=>{const f=findCalculator(slug);return f?<Link key={slug} href={"/kalkulator/"+slug+"/"} onClick={()=>setOpen(false)}>{f.item[1]} <span>↗</span></Link>:null})}</div>}<div className="switcher-group"><p className="eyebrow">KALKULATOR</p>{filtered.length?filtered.map(item=><Link key={item.slug} href={"/kalkulator/"+item.slug+"/"} onClick={()=>setOpen(false)}>{item.title}<small>{item.category}</small></Link>):<p className="muted small">Tidak ditemukan.</p>}</div>{results.length>0&&<div className="switcher-bottom"><span>{results.length} contoh hasil tersimpan selama sesi</span><button onClick={clear}>Hapus sesi</button></div>}</section></div>}</>;
+}

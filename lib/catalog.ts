@@ -1,0 +1,10 @@
+export const categories = [
+{slug:"gaji-pekerjaan",title:"Gaji & Pekerjaan",icon:"▣",description:"Hitung penghasilan, potongan, dan hak pekerja.",items:[["gaji-bersih","Gaji Bersih","Estimasi take-home pay bulanan"],["net-to-gross","Net to Gross","Cari bruto dari target bersih"],["pph-21","PPh 21","Simulasi pajak penghasilan"],["thr","THR","Simulasi tunjangan hari raya"]]},
+{slug:"pinjaman-kredit",title:"Pinjaman & Kredit",icon:"▤",description:"Rencanakan angsuran dan bandingkan skenario kredit.",items:[["cicilan","Cicilan","Bandingkan metode flat dan anuitas"],["kpr","KPR","Simulasi cicilan rumah"],["kkb","Kredit Kendaraan","Simulasi pembiayaan kendaraan"]]},
+{slug:"tabungan-deposito",title:"Tabungan & Deposito",icon:"◉",description:"Rencanakan tujuan menabung dan pertumbuhan saldo.",items:[["target-tabungan","Target Tabungan","Perkirakan setoran untuk mencapai target"],["deposito","Deposito","Simulasi bunga deposito"]]},
+{slug:"investasi-aset",title:"Investasi & Aset",icon:"▥",description:"Pahami proyeksi investasi beserta asumsi risikonya.",items:[["simulasi-investasi","Simulasi Investasi","Proyeksi pertumbuhan investasi"],["dca","DCA","Simulasi investasi berkala"]]},
+{slug:"pengeluaran-anggaran",title:"Pengeluaran & Anggaran",icon:"▦",description:"Alat praktis untuk pengeluaran sehari-hari.",items:[["split-bill","Split Bill","Bagi tagihan sesuai pesanan"],["diskon-pajak","Diskon & Pajak","Hitung harga akhir dan pajak"],["budget-bulanan","Budget Bulanan","Atur anggaran bulanan"]]},
+{slug:"kalkulator-umum",title:"Kalkulator Umum",icon:"▧",description:"Perhitungan cepat untuk kebutuhan harian.",items:[["persentase","Persentase","Hitung persen dan perubahan nilai"],["selisih-tanggal","Selisih Tanggal","Hitung jarak antartanggal"]]}
+] as const;
+export const released = new Set(["gaji-bersih","cicilan","target-tabungan","simulasi-investasi","split-bill","diskon-pajak","persentase"]);
+export function findCalculator(slug:string){for(const c of categories){const item=c.items.find(i=>i[0]===slug);if(item)return {category:c,item};}return null;}

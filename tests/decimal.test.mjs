@@ -1,0 +1,11 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { decimal, add, subtract, multiply, divide, round, formatDecimal } from "../lib/calculations/decimal.ts";
+const d = decimal;
+const fmt = formatDecimal;
+test("exact addition avoids 0.1 + 0.2 float error", () => assert.equal(fmt(add(d("0.1"), d("0.2"))), "0.3"));
+test("subtraction and multiplication", () => { assert.equal(fmt(subtract(d("10.00"), d("2.50"))), "7.50"); assert.equal(fmt(multiply(d("12.5"), d("2"))), "25.0"); });
+test("division requires explicit precision and rounding", () => { assert.equal(fmt(divide(d("1"), d("3"), 2, "half-up")), "0.33"); assert.equal(fmt(divide(d("-1"), d("8"), 2, "half-up")), "-0.13"); });
+test("half-up, half-even, down are explicit", () => { assert.equal(fmt(round(d("2.5"), 0, "half-up")), "3"); assert.equal(fmt(round(d("2.5"), 0, "half-even")), "2"); assert.equal(fmt(round(d("3.5"), 0, "half-even")), "4"); assert.equal(fmt(round(d("-2.5"), 0, "half-up")), "-3"); assert.equal(fmt(round(d("-2.9"), 0, "down")), "-2"); });
+test("large IDR amounts remain exact", () => assert.equal(fmt(add(d("9007199254740993"), d("1"))), "9007199254740994"));
+test("reject invalid input and divide by zero", () => { for (const v of ["NaN", "Infinity", "1e3", "1,000", " 1", "01"]) assert.throws(() => d(v)); assert.throws(() => divide(d("1"), d("0"), 2, "half-up")); });
